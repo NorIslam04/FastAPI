@@ -33,3 +33,11 @@ def get_with_name(test : int ,name: Optional[str]=None):
         if data[key]["name"].lower()==name.lower():
             return data[key]
     return {"error":"Data not found!"}
+
+#path with query parameter,and parameter item_id
+#use: /data/1/?name=John
+@app.get("/data/{item_id}/")
+def read_data_with_name(item_id:int,name: Optional[str]=None):
+    if data[item_id]["name"].lower()==name.lower():
+        return data[item_id]
+    return {"error":"Data not found!"}
