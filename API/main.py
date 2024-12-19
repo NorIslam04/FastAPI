@@ -2,10 +2,17 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from db import SessionLocal, engine
 import crud, models
+#from pydantic import BaseModel, EmailStr
 
 models.Base.metadata.create_all(bind=engine)# la fonction create_all est définie dans models.py
 
 app = FastAPI()
+
+# Modèle Pydantic
+"""class UserCreate(BaseModel):
+    name: str
+    email: EmailStr
+    """
 
 def get_db():# la fonction get_db permet de créer une session de base de données pour chaque requête
     db = SessionLocal()
