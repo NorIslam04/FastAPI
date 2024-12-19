@@ -31,3 +31,15 @@ def get_user(*,db: Session = Depends(get_db), user_id: int):
 @app.api_route("/adduser/{name}/{email}", methods=["GET", "POST"])
 def create_user(name: str, email: str, db: Session = Depends(get_db)):
     return crud.create_user(db, name=name, email=email)# la fonction create_user est définie dans crud.py
+
+"""
+@app.post("/users/")
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    # Vérifier si l'email existe déjà (optionnel)
+    existing_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    # Ajouter le nouvel utilisateur
+    return crud.create_user(db=db, name=user.name, email=user.email)
+    """
