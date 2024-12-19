@@ -1,0 +1,31 @@
+<form id="userForm">
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById('userForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const userData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value
+    };
+
+    fetch('http://api.example.com/users/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+</script>
